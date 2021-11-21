@@ -15,11 +15,11 @@ API Overview
 @api_view(['GET'])
 def apiOverview(request):
     api_urls = {
-        'List': '/task-list/',
-        'Detail View': '/task-detail/<str:pk>/',
-        'Create': '/task-create/',
-        'Update': '/task-update/<str:pk>/',
-        'Delete': '/task-delete/<str:pk>/',
+        'List': '/todo-list/',
+        'Detail View': '/todo-detail/<str:pk>/',
+        'Create': '/todo-create/',
+        'Update': '/todo-update/<str:pk>/',
+        'Delete': '/todo-delete/<str:pk>/',
     }
     return Response(api_urls)
 
