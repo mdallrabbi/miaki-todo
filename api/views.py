@@ -1,11 +1,18 @@
 from django.shortcuts import render
 
 # Create your views here.
+from rest_framework import viewsets
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import TodoSerializer
 from .models import Todo
+
+
+class TodoView(viewsets.ModelViewSet):
+    serializer_class = TodoSerializer
+    queryset = Todo.objects.all()
+
 
 """
 API Overview
@@ -13,33 +20,33 @@ API Overview
 
 
 @api_view(['GET'])
-def apiOverview(request):
+def Overview(request):
     api_urls = {
-        'List': '/todo-list/',
-        'Detail View': '/todo-detail/<str:pk>/',
-        'Create': '/todo-create/',
-        'Update': '/todo-update/<str:pk>/',
-        'Delete': '/todo-delete/<str:pk>/',
+        'List': '/list/',
+        'Detail View': '/detail/<str:pk>/',
+        'Create': '/create/',
+        'Update': '/update/<str:pk>/',
+        'Delete': '/delete/<str:pk>/',
     }
     return Response(api_urls)
 
 
 @api_view(['GET'])
-def todoList(request):
+def List(request):
     todos = Todo.objects.all()
     serializer = TodoSerializer(todos, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def todoDetail(request, pk):
+def Detail(request, pk):
     todos = Todo.objects.get(id=pk)
     serializer = TodoSerializer(todos, many=False)
     return Response(serializer.data)
 
 
 @api_view(['POST'])
-def todoUpdate(request, pk):
+def Update(request, pk):
     todo = Todo.objects.get(id=pk)
     serializer = TodoSerializer(instance=todo, data=request.data)
     if serializer.is_valid():
@@ -48,7 +55,7 @@ def todoUpdate(request, pk):
 
 
 @api_view(['POST'])
-def todoCreate(request):
+def Create(request):
     serializer = TodoSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -56,7 +63,7 @@ def todoCreate(request):
 
 
 @api_view(['DELETE'])
-def todoDelete(request, pk):
+def Delete(request, pk):
     task = Todo.objects.get(id=pk)
     task.delete()
     return Response("Todo deleted successfully.")

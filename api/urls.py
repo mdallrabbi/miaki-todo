@@ -2,11 +2,11 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.apiOverview, name="api-overview"),
-    path('todo-list/', views.todoList, name="todo-list"),
-    path('todo-detail/<str:pk>/', views.todoDetail, name="todo-Detail"),
-    path('todo-update/<str:pk>/', views.todoUpdate, name="todo-update"),
-    path('todo-create/', views.todoCreate, name="task-Create"),
-    path('task-delete/', views.todoDelete, name="task-delete"),
+    path('', views.Overview, name="overview"),
+    path('list/', views.List, name="list"),
+    path('detail/<str:pk>/', views.Detail, name="detail"),
+    path('update/<str:pk>/', views.Update, name="update"),
+    path('create/', views.Create, name="create"),
+    path('delete/', views.Delete, name="delete"),
 
 ]
