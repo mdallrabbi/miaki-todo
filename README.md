@@ -14,7 +14,7 @@ db_password: password
 ```angular2html
 git clone https://github.com/mdallrabbi/miaki-todo.git
 cd miakiToDo
-virtualenv -m python3 venv
+virtualenv -p python3 venv
 source venv/bin/activate
 pip3 install -r "requirements.txt"
 python3 manage.py makemigrations
